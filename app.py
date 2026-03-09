@@ -1,9 +1,11 @@
 # import flask
 from flask import*
 import pymysql
+from flask_cors import CORS
 import os
 # initialize the app
 app=Flask(__name__)
+CORS(app)
 app.config["UPLOAD_FOLDER"]="static/images"
 # define your route/endpoint
 @app.route("/api/signup",methods=["POST"])
@@ -15,7 +17,7 @@ def signup():
     password=request.form["password"]
     phone=request.form["phone"]
     # establish connection to database
-    connection=pymysql.connect(user="root",host="localhost",password="",database="kifarusokogarden")
+    connection=pymysql.connect(user="rodriquekifaru",host="mysql-rodriquekifaru.alwaysdata.net",password="modcom2026",database="rodriquekifaru_sokogarden")
     # define your cursor
     cursor=connection.cursor()
     # define sql to insert
@@ -37,7 +39,7 @@ def signin ():
     email=request.form["email"]
     password=request.form["password"]
     # connection
-    connection=pymysql.connect(user="root",host="localhost",password="",database="kifarusokogarden")
+    connection=pymysql.connect(user="rodriquekifaru",host="mysql-rodriquekifaru.alwaysdata.net",password="modcom2026",database="rodriquekifaru_sokogarden")
     # define cursor 
     cursor=connection.cursor(pymysql.cursors.DictCursor)
     # define sql to select
@@ -70,7 +72,7 @@ def add_product():
     # SAVE THE PHOTO
     product_photo.save(photopath)
     # establish connection
-    connection=pymysql.connect(user="root",host="localhost",password="",database="kifarusokogarden")
+    connection=pymysql.connect(user="rodriquekifaru",host="mysql-rodriquekifaru.alwaysdata.net",password="modcom2026",database="rodriquekifaru_sokogarden")
     # define your cursor
     cursor=connection.cursor()
     # define sql to insert
@@ -90,7 +92,7 @@ def add_product():
 # define your function
 def getproducts():
     # define your connection
-    connection=pymysql.connect(host="localhost",user="root",password="",database="kifarusokogarden")
+    connection=pymysql.connect(host="mysql-rodriquekifaru.alwaysdata.net",user="rodriquekifaru",password="modcom2026",database="rodriquekifaru_sokogarden")
     # define your cursor
     cursor=connection.cursor(pymysql.cursors.DictCursor)
     # define sql to select
@@ -161,10 +163,3 @@ def mpesa_payment():
 
 
 
-
-
-
-
-
-# run the app
-app.run(debug=True)
